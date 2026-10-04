@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>November Farms and Ranch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a bright white storefront. A hero with an illustrated hen and egg crate,
+   product tiles that open into cards, and a sticky order panel with one red button.
+   Boldness lives in two places only: the big display name and the hero illustration. */
+:root{
+  --paper:#FFFFFF; --surface:#FFFFFF; --ink:#14201A; --ink-2:#56635B;
+  --line:#E7ECE4; --line-2:#CFD8CB; --shell:#F3F7F0; --shell-2:#FFFFFF; --tint:#ECF5E8;
+  --yolk:#F8B800; --yolk-soft:#FFF3C9; --leaf:#2E7D32; --on-leaf:#FFFFFF; --leaf-text:#2A6E2E; --leaf-soft:#E3F2DE;
+  --red:#C62828; --on-red:#FFFFFF;
+  --alert:#B3261E; --ok:#1D7443; --ok-bg:#E3F3E7; --warn-bg:#FFF0CF; --warn-ink:#5A4100; --focus:#1D5FD1;
+  --arch:#DDEFD6; --hill1:#BFE0B5; --hill2:#8CC47F;
+  --shadow:0 1px 2px rgba(20,32,26,.05),0 8px 24px rgba(20,32,26,.07);
+  --shadow-lg:0 2px 4px rgba(20,32,26,.05),0 18px 40px rgba(20,32,26,.10);
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1411; --surface:#171D19; --ink:#EEF2EE; --ink-2:#A7B1A9;
+    --line:#26302A; --line-2:#3A453D; --shell:#202822; --shell-2:#2B352D; --tint:#1A2B1E;
+    --yolk:#F8B800; --yolk-soft:#3A3010; --leaf:#5CC264; --on-leaf:#08170E; --leaf-text:#86DB8C; --leaf-soft:#1C3322;
+    --red:#D13A3F; --on-red:#FFFFFF;
+    --alert:#FF8F80; --ok:#6AD595; --ok-bg:#17331F; --warn-bg:#3A2F10; --warn-ink:#FFD98A; --focus:#8AB6FF;
+    --arch:#1F3A26; --hill1:#2B5232; --hill2:#376B3F;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+    --shadow-lg:0 2px 4px rgba(0,0,0,.3),0 18px 40px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1411; --surface:#171D19; --ink:#EEF2EE; --ink-2:#A7B1A9;
+  --line:#26302A; --line-2:#3A453D; --shell:#202822; --shell-2:#2B352D; --tint:#1A2B1E;
+  --yolk:#F8B800; --yolk-soft:#3A3010; --leaf:#5CC264; --on-leaf:#08170E; --leaf-text:#86DB8C; --leaf-soft:#1C3322;
+  --red:#D13A3F; --on-red:#FFFFFF;
+  --alert:#FF8F80; --ok:#6AD595; --ok-bg:#17331F; --warn-bg:#3A2F10; --warn-ink:#FFD98A; --focus:#8AB6FF;
+  --arch:#1F3A26; --hill1:#2B5232; --hill2:#376B3F;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+  --shadow-lg:0 2px 4px rgba(0,0,0,.3),0 18px 40px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background-color:var(--paper);background-image:radial-gradient(900px 420px at 85% -80px,var(--tint),transparent 70%);background-repeat:no-repeat;color:var(--ink);font:400 15px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,dl,dd,ul,ol,fieldset{margin:0}
+ul,ol{padding:0;list-style:none}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.mono{font-family:var(--f-mono)}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:12px 40px}
+
+/* top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:8px 8px}
+.brand{display:flex;align-items:center;gap:10px;font:700 1rem/1 var(--f-display);letter-spacing:-.01em}
+.mark{width:34px;height:34px;flex:none}
+.mark path{fill:var(--yolk)}
+.mark ellipse{fill:#fff;opacity:.5}
+.chat{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--leaf);background:var(--leaf-soft);color:var(--leaf-text);font-weight:700;font-size:.875rem;text-decoration:none}
+.chat:hover{background:var(--leaf);color:var(--on-leaf)}
+.chat svg{width:18px;height:18px;fill:currentColor}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:36px;align-items:center;padding-block:20px 44px}
+.hero-copy{display:grid;gap:20px;justify-items:start;min-width:0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 10px;border-radius:999px;background:var(--leaf-soft);color:var(--leaf-text);font-weight:600;font-size:.8125rem}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--leaf)}
+h1{font:800 clamp(2.6rem,6.6vw + .3rem,4.8rem)/.96 var(--f-display);letter-spacing:-.045em;text-wrap:balance}
+h1 span{color:var(--leaf-text)}
+.lede{max-width:44ch;color:var(--ink-2);font-size:1.125rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px}
+.perks{display:flex;flex-wrap:wrap;gap:8px 20px;color:var(--ink-2);font-size:.875rem;font-weight:500}
+.perks li{display:flex;align-items:center;gap:8px}
+.perks li::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--red);transform:rotate(45deg)}
+.hero-art{justify-self:center;width:min(100%,430px);min-width:0}
+.hero-art svg{display:block;width:100%;height:auto;overflow:visible}
+.float{animation:bob 4.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-9px)}}
+body[data-view="invoice"] .hero{display:none}
+body[data-view="invoice"] .site-foot{display:none}
+
+/* layout */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:32px;align-items:start}
+main{min-width:0}
+body[data-view="invoice"] .layout{grid-template-columns:minmax(0,1fr);padding-top:16px}
+body[data-view="invoice"] .summary{display:none}
+
+/* product list */
+.group{scroll-margin-top:20px}
+.group+.group{margin-top:44px}
+.sec-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-head h2{font:800 2rem/1 var(--f-display);letter-spacing:-.03em}
+.sec-head p{color:var(--ink-2);font-size:.9375rem}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px;align-items:start}
+.item{min-width:0}
+.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:84px;padding:12px 14px;border-radius:18px;border:1px solid var(--line);background:var(--surface);text-align:left;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+.opt:hover{border-color:var(--leaf);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.opt[aria-expanded="true"]{border-color:var(--leaf);box-shadow:0 0 0 1px var(--leaf),var(--shadow)}
+.ic-tile{position:relative;display:grid;place-items:center;width:60px;height:60px;flex:none;border-radius:16px;background:var(--yolk-soft)}
+.ic-tile.poultry{background:var(--leaf-soft)}
+.ic{width:38px;height:38px;transform-origin:50% 60%}
+.ic .e{fill:var(--yolk)}
+.ic .sh{fill:#fff;opacity:.6}
+.ic .b{fill:#B9652F;stroke:#14201A;stroke-width:1.5;stroke-linejoin:round}
+.ic .eye{fill:#fff}
+.ic .c{fill:#D32F2F}
+.ic .k{fill:#F2A900}
+.ic .l{stroke:#F2A900;stroke-width:2;stroke-linecap:round;fill:none}
+.ic .w{stroke:#5A2A10;stroke-width:1.4;stroke-linecap:round;fill:none}
+.ic .y{fill:#14201A}
+.ic .m{fill:#D9822B}
+.ic .bn{fill:#EBD9B8;stroke:#B8975F;stroke-width:1}
+.opt-main{display:grid;min-width:0;flex:1;gap:1px}
+.opt-main b{font:700 1.125rem/1.2 var(--f-display);letter-spacing:-.01em}
+.opt-main small{color:var(--ink-2);font-size:.8125rem}
+.opt-main small strong{color:var(--ink);font-size:.9375rem;font-variant-numeric:tabular-nums}
+.opt-side{display:flex;align-items:center;gap:10px;flex:none}
+.badge{position:absolute;top:-7px;right:-7px;display:grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:999px;border:2px solid var(--surface);background:var(--red);color:var(--on-red);font:700 .75rem var(--f-mono);font-variant-numeric:tabular-nums}
+.badge[hidden]{display:none}
+.plus{position:relative;width:34px;height:34px;flex:none;border-radius:50%;background:var(--leaf-soft);transition:transform .2s ease,background-color .2s ease}
+.plus::before,.plus::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:2px;margin:-1px 0 0 -7px;border-radius:2px;background:var(--leaf-text)}
+.plus::after{transform:rotate(90deg)}
+.opt[aria-expanded="true"] .plus{transform:rotate(45deg);background:var(--leaf)}
+.opt[aria-expanded="true"] .plus::before,.opt[aria-expanded="true"] .plus::after{background:var(--on-leaf)}
+.reveal{margin-top:8px}
+
+/* product card */
+.card{display:grid;gap:12px;min-width:0;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:18px;animation:rise .26s ease both}
+@keyframes rise{from{transform:translateY(8px)}to{transform:none}}
+.viz{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:104px;padding:10px 16px;border-radius:12px;background:var(--shell)}
+.tray{display:grid;grid-template-columns:repeat(var(--cols),13px);gap:3px}
+.tray i{width:13px;height:16px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:var(--shell-2);box-shadow:inset 0 0 0 1.5px var(--line-2);transition:background-color .25s ease;transition-delay:calc(var(--i)*14ms)}
+.card.has .tray i{background:var(--yolk);box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.14)}
+.pips{display:flex;flex-wrap:wrap;gap:6px;max-width:112px}
+.pips i{width:14px;height:14px;border-radius:50%;background:var(--shell-2);box-shadow:inset 0 0 0 1.5px var(--line-2);transition:background-color .2s ease}
+.pips i.on{background:var(--leaf);box-shadow:none}
+.vtext{text-align:right;white-space:pre-line;font:600 .8125rem/1.35 var(--f-mono);color:var(--ink-2)}
+.card.has .vtext{color:var(--ink)}
+.note{color:var(--ink-2);font-size:.875rem}
+.card-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.line{font:500 .8125rem var(--f-mono);color:var(--ink-2);min-width:0}
+.card.has .line{color:var(--leaf-text);font-weight:600}
+.stepper{display:flex;align-items:center;overflow:hidden;border:1px solid var(--line-2);border-radius:12px;background:var(--surface)}
+.stepper button{width:46px;height:46px;border:0;background:transparent;font-size:1.3rem;font-weight:600;cursor:pointer}
+.stepper button:hover{background:var(--shell)}
+.stepper input[type=text]{width:3.6rem;min-height:46px;height:46px;padding:0;border:0;border-radius:0;border-inline:1px solid var(--line);background:transparent;text-align:center;font:600 1rem var(--f-mono);-moz-appearance:textfield}
+.foot{margin-top:28px;color:var(--ink-2);font-size:.8125rem}
+
+/* order panel */
+.summary{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);max-height:calc(100dvh - 32px);overflow-y:auto;padding:20px;background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--red);border-radius:20px;box-shadow:var(--shadow-lg)}
+.summary h2{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:12px;font:800 1.35rem var(--f-display);letter-spacing:-.02em}
+.summary h2 small{font:500 .8125rem var(--f-mono);color:var(--ink-2);letter-spacing:0}
+.empty{padding:18px;border-radius:12px;background:var(--shell);color:var(--ink-2);font-size:.875rem}
+.empty b{display:block;margin-bottom:2px;color:var(--ink)}
+.slist{display:grid;gap:10px}
+.slist li{display:flex;justify-content:space-between;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.slist span{display:block;font-size:.8125rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.slist .r{text-align:right;font-variant-numeric:tabular-nums}
+.slist .x{padding:2px 0;border:0;background:none;color:var(--ink-2);font-size:.8125rem;text-decoration:underline;cursor:pointer}
+.tot{display:grid;gap:6px;margin-top:12px;font-variant-numeric:tabular-nums}
+.tot div{display:flex;justify-content:space-between;gap:10px}
+.tot .grand{margin-top:6px;padding-top:12px;border-top:1px solid var(--line-2);font:800 1.6rem/1 var(--f-display);letter-spacing:-.02em}
+#order-form{display:grid;gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0;align-content:start}
+label,.lbl{font-weight:600;font-size:.875rem}
+input[type=text],input[type=tel],textarea{width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--line-2);border-radius:12px;background:var(--paper)}
+textarea{resize:vertical;min-height:76px}
+[aria-invalid="true"]{border-color:var(--alert)!important}
+.err{color:var(--alert);font-size:.8125rem}
+.dopts{border:0;padding:0;min-width:0}
+.dopts legend{padding:0;margin-bottom:6px}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.seg-opt{position:relative;display:grid;gap:2px;padding:10px 12px;border:1px solid var(--line-2);border-radius:12px;cursor:pointer;font-weight:400}
+.seg-opt input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.seg-opt:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:2px}
+.seg-opt.is-on{border-color:var(--leaf);box-shadow:0 0 0 1px var(--leaf);background:var(--tint)}
+.seg-opt b{font-weight:600;font-size:.9375rem}
+.seg-opt small{color:var(--ink-2);font:500 .8125rem var(--f-mono)}
+.fine{color:var(--ink-2);font-size:.8125rem;font-weight:400}
+.fine a,.meta a{color:var(--leaf-text);font-weight:600}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;border-radius:14px;border:1px solid var(--red);background:var(--red);color:var(--on-red);font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 6px 16px rgba(198,40,40,.22)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2);box-shadow:none}
+.btn.ghost:hover{border-color:var(--leaf);filter:none}
+.btn.wide{width:100%}
+.linkbtn{padding:6px 2px;border:0;background:none;color:var(--ink-2);font-weight:600;font-size:.875rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+
+/* invoice */
+.inv-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:20px;align-items:start}
+.doc{min-width:0;padding:28px;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg)}
+.doc-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:2px solid var(--ink)}
+.doc-brand{font:800 1.35rem var(--f-display);letter-spacing:-.02em}
+.doc-sub{margin-top:2px;color:var(--ink-2);font-size:.875rem}
+.doc-id{display:grid;gap:6px;justify-items:start}
+.doc-title{font:800 2rem/1 var(--f-display);letter-spacing:-.02em;text-transform:uppercase}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:600;font-size:.75rem}
+.pill.unpaid{background:var(--warn-bg);color:var(--warn-ink)}
+.pill.reported{background:var(--ok-bg);color:var(--ok)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin:18px 0}
+.meta dt{font:600 .6875rem var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+.meta dd{margin-top:2px;overflow-wrap:anywhere}
+.tablewrap{overflow-x:auto}
+table{width:100%;min-width:460px;border-collapse:collapse}
+th{padding:8px;border-bottom:1px solid var(--line-2);text-align:left;font:600 .6875rem var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th.n,td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td small{display:block;color:var(--ink-2)}
+.doc-totals{display:grid;gap:6px;max-width:330px;margin:14px 0 0 auto;font-variant-numeric:tabular-nums}
+.doc-totals div{display:flex;justify-content:space-between;gap:12px}
+.doc-totals .grand{margin-top:4px;padding:12px 14px;border-radius:12px;border:1px solid var(--leaf);background:var(--tint);color:var(--leaf-text);font:800 1.25rem var(--f-display)}
+.panel{padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg)}
+.panel h2{font:800 1.4rem/1.15 var(--f-display);letter-spacing:-.02em}
+.sub{margin-top:4px;color:var(--ink-2);font-size:.875rem}
+.pay{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:grid;gap:16px;border-top:4px solid var(--red)}
+.send{display:grid;gap:6px}
+.amt{font:800 2.4rem/1 var(--f-display);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.bank div{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.bank dt{color:var(--ink-2);font-size:.8125rem;flex:none}
+.bank dd{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0;font:600 .9375rem var(--f-mono);text-align:right;overflow-wrap:anywhere}
+.copy{flex:none;min-height:32px;padding:0 10px;border-radius:8px;border:1px solid var(--line-2);background:transparent;font-weight:600;font-size:.8125rem;cursor:pointer}
+.notice{padding:12px 14px;border-radius:12px;background:var(--warn-bg);color:var(--warn-ink);font-size:.875rem}
+.okbox{padding:12px 14px;border-radius:12px;background:var(--ok-bg);color:var(--ok);font-size:.875rem;font-weight:500}
+.after{display:grid;gap:10px;padding-top:16px;border-top:1px solid var(--line)}
+
+/* footer, dock and toast */
+.site-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px;margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink-2);font-size:.8125rem}
+.site-foot b{color:var(--ink);font-family:var(--f-display);font-size:.9375rem}
+.dock{display:none}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:50;max-width:calc(100% - 32px);padding:10px 16px;border-radius:10px;background:var(--ink);color:var(--paper);font-weight:600;font-size:.875rem;transform:translateX(-50%)}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:minmax(0,1fr);gap:20px;padding-block:12px 32px}
+  .hero-art{width:min(78%,330px)}
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .summary{position:static;max-height:none;overflow:visible}
+  .pay{position:static}
+  .inv-layout{grid-template-columns:minmax(0,1fr)}
+  body[data-view="shop"] .wrap{padding-bottom:108px}
+  body[data-view="shop"] .dock{display:flex}
+  .dock{position:fixed;left:0;right:0;bottom:0;z-index:20;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line-2);box-shadow:0 -8px 24px rgba(20,32,26,.10)}
+  .dock strong{display:block;font:800 1.3rem/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+  .dock span{font-size:.8125rem;color:var(--ink-2)}
+}
+@media (max-width:560px){
+  .doc{padding:16px}
+  .panel{padding:16px}
+  .doc-title{font-size:1.6rem}
+  .sec-head h2{font-size:1.7rem}
+  .hero-cta .btn{flex:1 1 140px}
+}
+@media (prefers-reduced-motion:reduce){
+  .tray i,.pips i,.plus,.opt{transition:none}
+  .card,.float{animation:none}
+  .opt:hover{transform:none}
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C10 3 5.5 12 5.5 19a10.5 10.5 0 0 0 21 0C26.5 12 22 3 16 3Z"/><ellipse cx="12.5" cy="15" rx="2.4" ry="4" transform="rotate(20 12.5 15)"/></svg>
+      <span>Eggs &amp; poultry</span>
+    </div>
+    <a class="chat" id="chat" href="#" target="_blank" rel="noopener" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.200 8.200 0 1 1 12 20.200Zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8-.2-.1-.4-.1-.6.100l-.8 1c-.1.200-.3.200-.5.100-1.500-.7-2.400-1.300-3.400-2.900-.3-.4.300-.4.800-1.400.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.100-.7.300-.8.800-1 1.700-.9 2.700.2 1.100.7 2.100 1.500 3 1.400 1.700 3.100 2.600 5.200 3.100.6.200 1.400.1 1.900-.2.500-.3.800-1 .9-1.700 0-.2 0-.3-.2-.4Z"/></svg>
+      Chat on WhatsApp
+    </a>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow"><i></i>Fresh eggs and healthy birds</span>
+      <h1 id="biz-name">November <span>Farms and Ranch</span></h1>
+      <p class="lede">Eggs by the crate and birds ready to cook. Tap a product, choose how many, and get your invoice in seconds.</p>
+      <div class="hero-cta">
+        <button type="button" class="btn" data-scroll="sec-eggs">Order eggs</button>
+        <button type="button" class="btn ghost" data-scroll="sec-poultry">Order poultry</button>
+      </div>
+      <ul class="perks">
+        <li>Pickup or delivery</li>
+        <li>Pay by bank transfer</li>
+        <li>Order sent to us on WhatsApp</li>
+      </ul>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 440 480" focusable="false">
+        <path d="M20 480V230a200 200 0 0 1 400 0V480Z" fill="var(--arch)"/>
+        <circle cx="322" cy="140" r="42" fill="var(--yolk)"/>
+        <path d="M20 408C96 372 168 378 226 398C294 421 356 386 420 376V480H20Z" fill="var(--hill1)"/>
+        <path d="M20 444C92 424 158 430 228 446C298 462 366 438 420 430V480H20Z" fill="var(--hill2)"/>
+        <path d="M70 96v14M63 103h14M372 236v14M365 243h14" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <g class="float">
+          <path d="M96 128C78 128 64 154 64 176a32 32 0 0 0 64 0C128 154 114 128 96 128Z" fill="var(--yolk)" stroke="#14201A" stroke-width="3" stroke-linejoin="round"/>
+          <ellipse cx="85" cy="156" rx="6" ry="11" fill="#fff" opacity=".65" transform="rotate(20 85 156)"/>
+        </g>
+        <ellipse cx="190" cy="440" rx="92" ry="8" fill="#000" opacity=".08"/>
+        <g stroke="#14201A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M170 400v36M208 400v36" stroke="#F2A900" stroke-width="6" fill="none"/>
+          <path d="M156 438h26M194 438h26" stroke="#F2A900" stroke-width="6" fill="none"/>
+          <path d="M104 322C74 314 58 284 62 254C86 262 108 282 118 306Z" fill="#8F431B"/>
+          <path d="M100 348C66 346 44 322 42 294C68 300 92 316 108 334Z" fill="#8F431B"/>
+          <circle cx="246" cy="240" r="10" fill="#D32F2F"/>
+          <circle cx="262" cy="232" r="12" fill="#D32F2F"/>
+          <circle cx="278" cy="240" r="10" fill="#D32F2F"/>
+          <ellipse cx="290" cy="298" rx="7" ry="12" fill="#D32F2F"/>
+          <ellipse cx="184" cy="338" rx="92" ry="70" fill="#B9652F"/>
+          <ellipse cx="248" cy="302" rx="30" ry="34" fill="#B9652F"/>
+          <circle cx="262" cy="270" r="34" fill="#B9652F"/>
+        </g>
+        <ellipse cx="184" cy="338" rx="90.500" ry="68.500" fill="#B9652F"/>
+        <ellipse cx="248" cy="302" rx="28.500" ry="32.500" fill="#B9652F"/>
+        <circle cx="262" cy="270" r="32.500" fill="#B9652F"/>
+        <g stroke="#14201A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M138 332C150 306 196 302 224 320C220 352 182 370 148 358C140 352 136 342 138 332Z" fill="#9B4C20"/>
+          <path d="M294 266L322 274L294 284Z" fill="#F2A900"/>
+        </g>
+        <circle cx="278" cy="266" r="5" fill="#14201A"/>
+        <circle cx="279.500" cy="264.500" r="1.800" fill="#fff"/>
+        <circle cx="270" cy="282" r="5" fill="#E9A27A" opacity=".7"/>
+        <circle cx="296" cy="392" r="0" fill="none"/>
+        <g stroke="#14201A" stroke-width="3" stroke-linejoin="round">
+          <ellipse cx="296" cy="394" rx="17" ry="22" fill="#D99A62"/>
+          <ellipse cx="336" cy="392" rx="17" ry="22" fill="#E6B07A"/>
+          <ellipse cx="376" cy="394" rx="17" ry="22" fill="#D99A62"/>
+          <path d="M268 400H404V430a14 14 0 0 1-14 14H282a14 14 0 0 1-14-14Z" fill="#E4CFA4"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <div class="layout">
+    <main id="main">
+      <section id="view-shop">
+        <div id="grid"></div>
+        <p class="foot">Prices are in naira. Eggs are sold by the crate of 30 unless stated.</p>
+      </section>
+
+      <section id="view-invoice" hidden>
+        <div class="inv-layout">
+          <article class="doc" id="doc" aria-label="Invoice"></article>
+          <section class="panel pay" id="pay" aria-label="Payment"></section>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn ghost" id="change-order">Change order</button>
+          <button type="button" class="btn ghost" id="new-order">Start a new order</button>
+        </div>
+      </section>
+    </main>
+
+    <aside class="summary" id="checkout" aria-label="Your order">
+      <h2>Your order <small id="count"></small></h2>
+      <div id="summary-body"></div>
+      <div class="tot" id="tot" hidden>
+        <div><span>Items</span><span id="t-sub"></span></div>
+        <div><span id="t-del-label">Delivery</span><span id="t-del"></span></div>
+        <div class="grand"><span>Total</span><span id="t-total"></span></div>
+      </div>
+      <form id="order-form" novalidate hidden>
+        <div class="field">
+          <label for="f-name">Your name</label>
+          <input id="f-name" type="text" autocomplete="name" aria-describedby="e-name">
+          <p class="err" id="e-name"></p>
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone number</label>
+          <input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0803 123 4567" aria-describedby="e-phone">
+          <p class="err" id="e-phone"></p>
+        </div>
+        <fieldset class="dopts">
+          <legend class="lbl">How will you get it?</legend>
+          <div class="seg" id="dopts"></div>
+        </fieldset>
+        <div class="field" id="addr-wrap" hidden>
+          <label for="f-address">Delivery address</label>
+          <textarea id="f-address" autocomplete="street-address" aria-describedby="e-address"></textarea>
+          <p class="err" id="e-address"></p>
+          <label for="f-map">Google Maps location <span class="fine">(optional)</span></label>
+          <input id="f-map" type="text" inputmode="url" autocomplete="off" placeholder="Paste a Google Maps link" aria-describedby="e-map">
+          <p class="err" id="e-map"></p>
+          <p class="fine">Open <a href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps</a>, tap your spot, choose Share, copy the link and paste it here.</p>
+        </div>
+        <p class="fine">We confirm the pickup or delivery time on WhatsApp.</p>
+        <button type="submit" class="btn wide">Get my invoice</button>
+      </form>
+    </aside>
+  </div>
+
+  <footer class="site-foot">
+    <b id="foot-name"></b>
+    <span id="foot-contact"></span>
+  </footer>
+</div>
+
+<div class="dock" id="dock" hidden>
+  <div><span id="dock-count"></span><strong id="dock-total"></strong></div>
+  <button type="button" class="btn" data-scroll="checkout">Checkout</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- Farm settings: edit this block ---------- */
+const CONFIG = {
+  businessName: 'November Farms and Ranch',
+  phoneDisplay: '0808 414 8863',   // shown on the invoice
+  whatsapp: '2348084148863',       // digits with country code, no plus
+  bank: { name: '', accountName: '', accountNumber: '' },
+  paymentLink: '',           // optional Paystack or Flutterwave payment page link (https://...)
+  holdHours: 24,             // how long an unpaid order is held
+  delivery: [
+    { id: 'pickup',   label: 'Pickup',   long: 'Pickup at the farm',       fee: 0 },
+    { id: 'delivery', label: 'Delivery', long: 'Delivery to your address', fee: 1500, address: true }
+  ]
+};
+
+/* Sample prices in naira. Replace with your own. */
+const PRODUCTS = [
+  { id:'egg-jumbo',  cat:'eggs', icon:'egg', sz:1,    name:'Jumbo eggs',  unit:'crate of 30', noun:'crate', price:5800, eggs:30, cols:6, note:'Heavy, thick-shelled eggs. A favourite with bakeries and restaurants.' },
+  { id:'egg-large',  cat:'eggs', icon:'egg', sz:.92,  name:'Large eggs',  unit:'crate of 30', noun:'crate', price:5200, eggs:30, cols:6, note:'Our everyday crate for homes, shops and canteens.' },
+  { id:'egg-medium', cat:'eggs', icon:'egg', sz:.82,  name:'Medium eggs', unit:'crate of 30', noun:'crate', price:4800, eggs:30, cols:6, note:'Good value for bulk cooking and frying.' },
+  { id:'egg-small',  cat:'eggs', icon:'egg', sz:.72,  name:'Small eggs',  unit:'crate of 30', noun:'crate', price:4300, eggs:30, cols:6, note:'Budget crate, collected fresh from the pens.' },
+  { id:'egg-half',   cat:'eggs', icon:'egg', sz:.88,  name:'Half crate, large eggs', unit:'15 eggs', noun:'half crate', price:2700, eggs:15, cols:5, note:'When a full crate is more than you need.' },
+  { id:'bird-broiler',  cat:'poultry', icon:'hen',   name:'Live broiler', unit:'per bird', noun:'bird', price:11000, note:'About 2.5 kg live weight, 6 to 7 weeks old. Order 1 day ahead.' },
+  { id:'bird-dressed',  cat:'poultry', icon:'drum',  name:'Dressed broiler', unit:'per bird', noun:'bird', price:9500, note:'Slaughtered, cleaned and packed. About 1.8 kg. Order 1 day ahead.' },
+  { id:'bird-cockerel', cat:'poultry', icon:'hen',   name:'Live cockerel', unit:'per bird', noun:'bird', price:9500, note:'Strong, lean bird of about 2 kg. Order 1 day ahead.' },
+  { id:'bird-pullet',   cat:'poultry', icon:'hen',   name:'Point-of-lay pullet', unit:'per bird', noun:'bird', price:6800, note:'18 to 20 weeks old, vaccinated, ready to lay. Order 3 days ahead.' },
+  { id:'bird-layer',    cat:'poultry', icon:'hen',   name:'Old layer (spent hen)', unit:'per bird', noun:'bird', price:5500, note:'Good for pepper soup and slow stews. Order 1 day ahead.' },
+  { id:'chick-doc',     cat:'poultry', icon:'chick', name:'Day-old broiler chicks', unit:'per chick', noun:'chick', price:850, min:50, step:10, max:2000, note:'Minimum of 50 chicks, then in tens. Order 3 days ahead.' }
+];
+
+/* ---------- helpers ---------- */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const nf = new Intl.NumberFormat('en-NG');
+const money = n => '₦' + nf.format(n);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = n => String(n).padStart(2, '0');
+const plural = (n, noun) => n + ' ' + noun + (n === 1 ? '' : 's');
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const fmtDate = iso => new Date(iso).toLocaleDateString('en-NG', {day:'numeric', month:'long', year:'numeric'});
+const fmtDT = iso => new Date(iso).toLocaleString('en-NG', {weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit'});
+const waDigits = () => String(CONFIG.whatsapp || '').replace(/\D/g, '');
+const waLink = text => 'https://wa.me/' + waDigits() + '?text=' + encodeURIComponent(text);
+const bankReady = () => !!(CONFIG.bank.name && CONFIG.bank.accountName && CONFIG.bank.accountNumber);
+
+/* ---------- state ---------- */
+const draft = store.get('yf.draft', {});
+const state = {
+  view: 'shop',
+  cart: {},
+  customer: Object.assign({name:'', phone:'', address:'', map:''}, draft.customer || {}),
+  delivery: CONFIG.delivery.some(d => d.id === draft.delivery) ? draft.delivery : CONFIG.delivery[0].id,
+  invoice: store.get('yf.invoice', null)
+};
+PRODUCTS.forEach(p => { const q = draft.cart && draft.cart[p.id]; if (q > 0) state.cart[p.id] = normQty(p, q); });
+if (state.invoice && !(state.invoice.lines && state.invoice.customer)) state.invoice = null;
+
+function saveDraft(){ store.set('yf.draft', {cart: state.cart, customer: state.customer, delivery: state.delivery}); }
+
+/* ---------- cart logic ---------- */
+function normQty(p, v){
+  v = Math.floor(Number(v));
+  if (!isFinite(v) || v <= 0) return 0;
+  const min = p.min || 1, step = p.step || 1, max = p.max || 500;
+  if (v < min) v = min;
+  v = min + Math.round((v - min) / step) * step;
+  return Math.min(v, max);
+}
+function lines(){
+  return PRODUCTS.filter(p => state.cart[p.id] > 0).map(p => ({
+    id: p.id, name: p.name, unit: p.unit, qty: state.cart[p.id], price: p.price, total: p.price * state.cart[p.id]
+  }));
+}
+function currentDelivery(){ return CONFIG.delivery.find(d => d.id === state.delivery) || CONFIG.delivery[0]; }
+function totals(){
+  const ls = lines();
+  const sub = ls.reduce((a, l) => a + l.total, 0);
+  const d = currentDelivery();
+  const fee = ls.length ? d.fee : 0;
+  return {ls: ls, sub: sub, fee: fee, total: sub + fee, d: d};
+}
+function setQty(id, v){
+  const p = PRODUCTS.find(x => x.id === id);
+  const q = normQty(p, v);
+  if (q > 0) state.cart[id] = q; else delete state.cart[id];
+  saveDraft();
+  updateCard(id);
+  renderSummary();
+  renderDock();
+}
+function stepQty(p, dir){
+  const cur = state.cart[p.id] || 0, min = p.min || 1, step = p.step || 1;
+  let next;
+  if (dir > 0) next = cur === 0 ? min : cur + step;
+  else next = (cur - step < min) ? 0 : cur - step;
+  setQty(p.id, next);
+}
+
+/* ---------- catalog ---------- */
+const ICONS = {
+  egg:   '<svg class="ic" viewBox="0 0 36 36" aria-hidden="true"><path class="e" d="M18 4C11.5 4 7 13 7 20.5a11 11 0 0 0 22 0C29 13 24.5 4 18 4Z"/><ellipse class="sh" cx="13.5" cy="16" rx="2.6" ry="4.4" transform="rotate(20 13.5 16)"/></svg>',
+  hen:   '<svg class="ic" viewBox="0 0 36 36" aria-hidden="true"><path class="l" d="M15 28v5M21 28v5"/><ellipse class="b" cx="16" cy="21" rx="10" ry="8"/><circle class="b" cx="26" cy="12" r="5"/><path class="k" d="M30.5 11l4.5 2-4.5 2z"/><path class="c" d="M23 8c0-3 2-4.2 3.2-2.2C27.5 3.8 29.6 5.2 29 8z"/><circle class="eye" cx="27.6" cy="11" r="1.2"/><path class="w" d="M10 21c3 3.5 8.5 3.5 11.5 0"/></svg>',
+  chick: '<svg class="ic" viewBox="0 0 36 36" aria-hidden="true"><path class="k" d="M12 30l-2 3M24 30l2 3" stroke="#F2A900" stroke-width="2" stroke-linecap="round" fill="none"/><circle class="e" cx="18" cy="19" r="12.5"/><path class="e" d="M15 7c1-3 2.500-3 3-1 .6-2 2.200-2 2.500 1z"/><circle class="y" cx="13" cy="16.500" r="1.600"/><circle class="y" cx="23" cy="16.500" r="1.600"/><path d="M15.500 20.500h5L18 24.500z" fill="#F28C28"/><ellipse class="sh" cx="11" cy="23" rx="2" ry="1.300"/></svg>',
+  drum:  '<svg class="ic" viewBox="0 0 36 36" aria-hidden="true"><path d="M21 21l8 8" stroke="#B8975F" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M21 21l8 8" stroke="#EBD9B8" stroke-width="4" stroke-linecap="round" fill="none"/><circle class="bn" cx="31" cy="28.500" r="2.800"/><circle class="bn" cx="28.500" cy="31" r="2.800"/><ellipse class="m" cx="15" cy="15" rx="11.500" ry="9.500" transform="rotate(-38 15 15)"/><ellipse cx="11.500" cy="11" rx="4.500" ry="2.200" fill="#fff" opacity=".35" transform="rotate(-38 11.500 11)"/></svg>'
+};
+function iconFor(p){
+  const svg = ICONS[p.icon] || ICONS.hen;
+  return p.sz && p.sz !== 1 ? svg.replace('class="ic"', 'class="ic" style="transform:scale(' + p.sz + ')"') : svg;
+}
+
+function vizHTML(p){
+  if (p.eggs){
+    let dots = '';
+    for (let i = 0; i < p.eggs; i++) dots += '<i style="--i:' + i + '"></i>';
+    return '<div class="tray" style="--cols:' + p.cols + '">' + dots + '</div><div class="vtext" data-vtext></div>';
+  }
+  let pips = '';
+  for (let i = 0; i < 10; i++) pips += '<i></i>';
+  return '<div class="pips">' + pips + '</div><div class="vtext" data-vtext></div>';
+}
+function cardHTML(p){
+  const n = esc(p.name);
+  return '<article class="card" data-id="' + p.id + '">' +
+    '<div class="viz" aria-hidden="true">' + vizHTML(p) + '</div>' +
+    '<p class="note">' + esc(p.note) + '</p>' +
+    '<div class="card-foot">' +
+      '<p class="line" data-line></p>' +
+      '<div class="stepper" role="group" aria-label="Quantity for ' + n + '">' +
+        '<button type="button" data-act="dec" aria-label="Fewer ' + n + '">−</button>' +
+        '<input type="text" inputmode="numeric" value="0" data-qty aria-label="Quantity of ' + n + '">' +
+        '<button type="button" data-act="inc" aria-label="More ' + n + '">+</button>' +
+      '</div>' +
+    '</div>' +
+  '</article>';
+}
+function itemHTML(p){
+  return '<div class="item" data-item="' + p.id + '">' +
+    '<button type="button" class="opt" data-toggle="' + p.id + '" aria-expanded="false">' +
+      '<span class="ic-tile ' + p.cat + '">' + iconFor(p) + '<span class="badge" data-badge hidden></span></span>' +
+      '<span class="opt-main"><b>' + esc(p.name) + '</b><small><strong>' + money(p.price) + '</strong> · ' + esc(p.unit) + '</small></span>' +
+      '<span class="plus" aria-hidden="true"></span>' +
+    '</button>' +
+    '<div class="reveal" hidden>' + cardHTML(p) + '</div>' +
+  '</div>';
+}
+function buildCatalog(){
+  const groups = [['eggs', 'Eggs', 'Sold by the crate of 30.'], ['poultry', 'Poultry', 'Live birds, dressed birds and day-old chicks.']];
+  $('#grid').innerHTML = groups.map(g =>
+    '<section class="group" id="sec-' + g[0] + '"><div class="sec-head"><h2>' + g[1] + '</h2><p>' + g[2] + '</p></div><div class="list">' +
+    PRODUCTS.filter(p => p.cat === g[0]).map(itemHTML).join('') +
+    '</div></section>'
+  ).join('');
+  PRODUCTS.forEach(p => updateCard(p.id));
+}
+function updateCard(id){
+  const card = $('.card[data-id="' + id + '"]');
+  if (!card) return;
+  const p = PRODUCTS.find(x => x.id === id);
+  const q = state.cart[id] || 0;
+  card.classList.toggle('has', q > 0);
+  const input = $('[data-qty]', card);
+  if (document.activeElement !== input) input.value = q;
+  $('[data-line]', card).textContent = q > 0 ? q + ' × ' + money(p.price) + ' = ' + money(q * p.price) : money(p.price) + ' per ' + p.noun;
+  let vt;
+  if (p.eggs) vt = q > 0 ? plural(q, p.noun) + '\n' + nf.format(q * p.eggs) + ' eggs' : p.eggs + ' eggs\nper ' + p.noun;
+  else vt = q > 0 ? plural(q, p.noun) : '';
+  $('[data-vtext]', card).textContent = vt;
+  if (!p.eggs){
+    $$('.pips i', card).forEach((el, i) => el.classList.toggle('on', i < Math.min(q, 10)));
+  }
+  const badge = $('[data-badge]', card.closest('.item'));
+  badge.hidden = q === 0;
+  badge.textContent = q;
+  badge.setAttribute('aria-label', plural(q, p.noun) + ' in your order');
+}
+
+/* ---------- order panel ---------- */
+function renderSummary(){
+  const t = totals();
+  const body = $('#summary-body');
+  $('#count').textContent = t.ls.length ? t.ls.length + (t.ls.length === 1 ? ' item' : ' items') : '';
+  if (!t.ls.length){
+    body.innerHTML = '<div class="empty"><b>Nothing here yet</b>Tap a product and choose how many. Your total shows up here.</div>';
+  } else {
+    body.innerHTML = '<ul class="slist">' + t.ls.map(l =>
+      '<li><div><strong>' + esc(l.name) + '</strong><span>' + l.qty + ' × ' + money(l.price) + '</span></div>' +
+      '<div class="r"><b>' + money(l.total) + '</b><br><button type="button" class="x" data-remove="' + l.id + '" aria-label="Remove ' + esc(l.name) + '">Remove</button></div></li>'
+    ).join('') + '</ul>';
+  }
+  $('#tot').hidden = !t.ls.length;
+  $('#order-form').hidden = !t.ls.length;
+  $('#t-sub').textContent = money(t.sub);
+  $('#t-del-label').textContent = t.d.long;
+  $('#t-del').textContent = t.fee ? money(t.fee) : 'Free';
+  $('#t-total').textContent = money(t.total);
+}
+function renderDock(){
+  const t = totals();
+  $('#dock').hidden = !t.ls.length;
+  $('#dock-count').textContent = t.ls.length + (t.ls.length === 1 ? ' item' : ' items');
+  $('#dock-total').textContent = money(t.sub + t.fee);
+}
+function buildDelivery(){
+  $('#dopts').innerHTML = CONFIG.delivery.map(d =>
+    '<label class="seg-opt" data-d="' + d.id + '"><input type="radio" name="delivery" value="' + d.id + '">' +
+    '<b>' + esc(d.label) + '</b><small>' + (d.fee ? money(d.fee) : 'Free') + '</small></label>'
+  ).join('');
+}
+function syncDelivery(){
+  $$('.seg-opt').forEach(el => {
+    const on = el.dataset.d === state.delivery;
+    el.classList.toggle('is-on', on);
+    $('input', el).checked = on;
+  });
+  $('#addr-wrap').hidden = !currentDelivery().address;
+}
+function fillForm(){
+  $('#f-name').value = state.customer.name;
+  $('#f-phone').value = state.customer.phone;
+  $('#f-address').value = state.customer.address;
+  $('#f-map').value = state.customer.map || '';
+  syncDelivery();
+}
+function validate(c){
+  const e = {};
+  if (c.name.length < 2) e.name = 'Enter your name.';
+  const ph = c.phone.replace(/[\s()\-]/g, '');
+  if (!/^(\+?234|0)[789][01]\d{8}$/.test(ph)) e.phone = 'Enter a Nigerian mobile number, like 0803 123 4567.';
+  if (currentDelivery().address && c.address.length < 6) e.address = 'Enter the delivery address.';
+  if (currentDelivery().address && c.map && !/^https?:\/\/(www\.)?(google\.[a-z.]+\/maps|maps\.google\.[a-z.]+|maps\.app\.goo\.gl|goo\.gl\/maps)/i.test(c.map)) e.map = 'Paste a Google Maps link, or leave this empty.';
+  return e;
+}
+function showErrors(e){
+  const keys = ['name', 'phone', 'address', 'map'];
+  keys.forEach(k => {
+    $('#e-' + k).textContent = e[k] || '';
+    if (e[k]) $('#f-' + k).setAttribute('aria-invalid', 'true'); else $('#f-' + k).removeAttribute('aria-invalid');
+  });
+  const first = keys.find(k => e[k]);
+  if (first) $('#f-' + first).focus();
+}
+
+/* ---------- invoice ---------- */
+function makeInvoice(c){
+  const t = totals(), now = new Date();
+  const no = 'INV-' + String(now.getFullYear()).slice(2) + pad(now.getMonth()+1) + pad(now.getDate()) + '-' + String(Math.floor(1000 + Math.random() * 9000));
+  return {
+    no: no, issuedAt: now.toISOString(), dueAt: new Date(now.getTime() + CONFIG.holdHours * 3600000).toISOString(),
+    customer: c, delivery: {id: t.d.id, label: t.d.long, fee: t.fee},
+    lines: t.ls, subtotal: t.sub, total: t.sub + t.fee, status: 'unpaid'
+  };
+}
+function invoiceText(inv){
+  const c = inv.customer, L = [];
+  L.push('NEW ORDER ' + inv.no, CONFIG.businessName, 'Issued: ' + fmtDate(inv.issuedAt), 'Pay by: ' + fmtDT(inv.dueAt), '');
+  L.push('Customer: ' + c.name, 'Phone: ' + c.phone, inv.delivery.label + (c.address ? ': ' + c.address : ''));
+  if (c.map) L.push('Map: ' + c.map);
+  else if (c.address) L.push('Map: https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(c.address));
+  L.push('');
+  inv.lines.forEach(l => L.push(l.qty + ' x ' + l.name + ' (' + l.unit + ') @ ' + money(l.price) + ' = ' + money(l.total)));
+  L.push('', 'Items: ' + money(inv.subtotal), inv.delivery.label + ': ' + (inv.delivery.fee ? money(inv.delivery.fee) : 'Free'), 'TOTAL: ' + money(inv.total));
+  if (bankReady()) L.push('', 'Pay to: ' + CONFIG.bank.name + ', ' + CONFIG.bank.accountName + ', ' + CONFIG.bank.accountNumber, 'Narration: ' + inv.no);
+  return L.join('\n');
+}
+function proofText(inv){
+  return 'Payment sent for ' + inv.no + '\nAmount: ' + money(inv.total) + '\nName: ' + inv.customer.name;
+}
+function statusInfo(inv){
+  return inv.status === 'reported' ? {cls:'reported', label:'Payment reported'} : {cls:'unpaid', label:'Awaiting payment'};
+}
+function renderDoc(inv){
+  const c = inv.customer, st = statusInfo(inv);
+  const contact = [CONFIG.phoneDisplay, waDigits() ? 'WhatsApp +' + waDigits() : ''].filter(Boolean).join(' · ') || 'Eggs and poultry';
+  $('#doc').innerHTML =
+    '<div class="doc-head"><div><p class="doc-brand">' + esc(CONFIG.businessName) + '</p><p class="doc-sub">' + esc(contact) + '</p></div>' +
+    '<div class="doc-id"><p class="doc-title">Invoice</p><p class="mono">' + esc(inv.no) + '</p><span class="pill ' + st.cls + '">' + st.label + '</span></div></div>' +
+    '<dl class="meta">' +
+      '<div><dt>Issued</dt><dd>' + esc(fmtDate(inv.issuedAt)) + '</dd></div>' +
+      '<div><dt>Pay by</dt><dd>' + esc(fmtDT(inv.dueAt)) + '</dd></div>' +
+      '<div><dt>Billed to</dt><dd>' + esc(c.name) + '<br>' + esc(c.phone) + '</dd></div>' +
+      '<div><dt>' + esc(inv.delivery.label) + '</dt><dd>' + (c.address ? esc(c.address) : 'We confirm the time on WhatsApp') +
+        (c.map && /^https?:\/\//.test(c.map) ? '<br><a href="' + esc(c.map) + '" target="_blank" rel="noopener">Open location in Google Maps</a>' : '') + '</dd></div>' +
+    '</dl>' +
+    '<div class="tablewrap"><table><thead><tr><th>Item</th><th class="n">Qty</th><th class="n">Unit price</th><th class="n">Amount</th></tr></thead><tbody>' +
+    inv.lines.map(l => '<tr><td>' + esc(l.name) + '<small>' + esc(l.unit) + '</small></td><td class="n">' + l.qty + '</td><td class="n">' + money(l.price) + '</td><td class="n">' + money(l.total) + '</td></tr>').join('') +
+    '</tbody></table></div>' +
+    '<div class="doc-totals"><div><span>Items</span><span>' + money(inv.subtotal) + '</span></div>' +
+    '<div><span>' + esc(inv.delivery.label) + '</span><span>' + (inv.delivery.fee ? money(inv.delivery.fee) : 'Free') + '</span></div>' +
+    '<div class="grand"><span>Total due</span><span>' + money(inv.total) + '</span></div></div>';
+}
+function renderPay(inv){
+  const reported = inv.status === 'reported';
+  let bank;
+  if (bankReady()){
+    const rows = [
+      {k:'Bank', v:CONFIG.bank.name},
+      {k:'Account name', v:CONFIG.bank.accountName},
+      {k:'Account number', v:CONFIG.bank.accountNumber, copy:CONFIG.bank.accountNumber},
+      {k:'Amount', v:money(inv.total), copy:String(inv.total)},
+      {k:'Narration', v:inv.no, copy:inv.no}
+    ];
+    bank = '<dl class="bank">' + rows.map(r => '<div><dt>' + r.k + '</dt><dd><span>' + esc(r.v) + '</span>' +
+      (r.copy != null ? '<button type="button" class="copy" data-copy="' + esc(r.copy) + '">Copy</button>' : '') + '</dd></div>').join('') + '</dl>';
+  } else {
+    bank = '<p class="notice">Bank details are being set up. Message the farm and confirm the account before you send any money. Quote ' + esc(inv.no) + '.</p>';
+  }
+  const online = /^https:\/\//.test(CONFIG.paymentLink)
+    ? '<a class="btn wide" href="' + esc(CONFIG.paymentLink) + '" target="_blank" rel="noopener">Pay ' + money(inv.total) + ' online</a>' : '';
+  const paidBtn = waDigits()
+    ? '<a class="btn wide" href="' + esc(waLink(proofText(inv))) + '" target="_blank" rel="noopener" data-report>I have paid. Tell the farm</a>'
+    : '<button type="button" class="btn wide" data-report>I have paid. Tell the farm</button>';
+  const sendInv = waDigits()
+    ? '<div class="send"><a class="btn wide" href="' + esc(waLink(invoiceText(inv))) + '" target="_blank" rel="noopener">Send my order to the farm on WhatsApp</a><p class="sub">Tap Send in WhatsApp so the farm receives your order.</p></div>' : '';
+  $('#pay').innerHTML =
+    '<div><h2>Send and pay</h2><p class="sub">Your order is held until ' + esc(fmtDT(inv.dueAt)) + '.</p></div>' +
+    sendInv +
+    '<p class="amt">' + money(inv.total) + '</p>' + bank + online +
+    '<div class="after">' +
+      (reported ? '<p class="okbox">Thanks. The farm will confirm your payment and reply to you.</p>' : '') +
+      paidBtn +
+      '<button type="button" class="linkbtn" data-copy-invoice>Copy invoice text</button>' +
+    '</div>';
+  $('#change-order').hidden = reported;
+}
+function showInvoice(inv){
+  state.invoice = inv;
+  store.set('yf.invoice', inv);
+  renderDoc(inv);
+  renderPay(inv);
+  go('invoice');
+}
+
+/* ---------- views ---------- */
+function go(v){
+  if (v === 'invoice' && !state.invoice) v = 'shop';
+  state.view = v;
+  document.body.dataset.view = v;
+  $('#view-shop').hidden = v !== 'shop';
+  $('#view-invoice').hidden = v !== 'invoice';
+  renderSummary();
+  renderDock();
+  window.scrollTo(0, 0);
+}
+
+/* ---------- toast and copy ---------- */
+let toastTimer;
+function toast(msg){
+  const el = $('#toast');
+  el.textContent = msg; el.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.hidden = true; }, 2400);
+}
+async function copyText(t){
+  try{ if (navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(t); return true; } }catch(e){}
+  try{
+    const ta = document.createElement('textarea');
+    ta.value = t; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    const ok = document.execCommand('copy');
+    ta.remove();
+    return ok;
+  }catch(e){ return false; }
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', ev => {
+  const t = ev.target.closest('button, a');
+  if (!t) return;
+  if (t.dataset.toggle){
+    const panel = $('.reveal', t.closest('.item'));
+    const open = panel.hidden;
+    panel.hidden = !open;
+    t.setAttribute('aria-expanded', String(open));
+    return;
+  }
+  if (t.dataset.act){
+    const p = PRODUCTS.find(x => x.id === t.closest('.card').dataset.id);
+    return stepQty(p, t.dataset.act === 'inc' ? 1 : -1);
+  }
+  if (t.dataset.remove) return setQty(t.dataset.remove, 0);
+  if (t.dataset.scroll){
+    const el = document.getElementById(t.dataset.scroll);
+    if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    return;
+  }
+  if (t.dataset.copy !== undefined){
+    return copyText(t.dataset.copy).then(ok => toast(ok ? 'Copied' : 'Could not copy. Select the text and copy it.'));
+  }
+  if (t.hasAttribute('data-copy-invoice') && state.invoice){
+    return copyText(invoiceText(state.invoice)).then(ok => toast(ok ? 'Invoice text copied' : 'Could not copy. Try again.'));
+  }
+  if (t.hasAttribute('data-report') && state.invoice){
+    const inv = state.invoice;
+    inv.status = 'reported';
+    store.set('yf.invoice', inv);
+    setTimeout(() => { renderDoc(inv); renderPay(inv); }, 0);
+    return;
+  }
+  if (t.id === 'change-order'){
+    state.invoice = null;
+    store.set('yf.invoice', null);
+    go('shop');
+    return;
+  }
+  if (t.id === 'new-order'){
+    state.cart = {}; state.invoice = null;
+    store.set('yf.invoice', null);
+    saveDraft();
+    PRODUCTS.forEach(p => updateCard(p.id));
+    go('shop');
+    return;
+  }
+});
+$('#grid').addEventListener('change', ev => {
+  if (!ev.target.matches('[data-qty]')) return;
+  const id = ev.target.closest('.card').dataset.id;
+  setQty(id, ev.target.value.replace(/[^\d]/g, ''));
+  ev.target.value = state.cart[id] || 0;
+});
+$('#grid').addEventListener('focusin', ev => { if (ev.target.matches('[data-qty]')) ev.target.select(); });
+$('#grid').addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.matches('[data-qty]')) ev.target.blur(); });
+$('#dopts').addEventListener('change', ev => {
+  if (ev.target.name !== 'delivery') return;
+  state.delivery = ev.target.value;
+  saveDraft(); syncDelivery(); renderSummary(); renderDock();
+});
+$('#order-form').addEventListener('input', ev => {
+  const id = ev.target.id;
+  if (!id || id.indexOf('f-') !== 0) return;
+  const key = id.slice(2);
+  state.customer[key] = ev.target.value;
+  saveDraft();
+  const msg = $('#e-' + key);
+  if (msg){ msg.textContent = ''; ev.target.removeAttribute('aria-invalid'); }
+});
+$('#order-form').addEventListener('submit', ev => {
+  ev.preventDefault();
+  if (!lines().length) return;
+  const deliver = !!currentDelivery().address;
+  const c = {
+    name: $('#f-name').value.trim(), phone: $('#f-phone').value.trim(),
+    address: deliver ? $('#f-address').value.trim() : '', map: deliver ? $('#f-map').value.trim() : ''
+  };
+  const errs = validate(c);
+  showErrors(errs);
+  if (Object.keys(errs).length) return;
+  state.customer = c; saveDraft();
+  showInvoice(makeInvoice(c));
+});
+
+/* ---------- start ---------- */
+(function(){
+  const parts = CONFIG.businessName.split(' ');
+  $('#biz-name').innerHTML = esc(parts[0]) + (parts.length > 1 ? ' <span>' + esc(parts.slice(1).join(' ')) + '</span>' : '');
+  $('#foot-name').textContent = CONFIG.businessName;
+  $('#foot-contact').textContent = [CONFIG.phoneDisplay, 'Eggs and poultry'].filter(Boolean).join(' · ');
+})();
+if (waDigits()){ const a = $('#chat'); a.href = 'https://wa.me/' + waDigits(); a.hidden = false; }
+buildDelivery();
+buildCatalog();
+fillForm();
+if (state.invoice){ renderDoc(state.invoice); renderPay(state.invoice); }
+go(state.invoice ? 'invoice' : 'shop');
+})();
+</script>
+</body>
+</html>
